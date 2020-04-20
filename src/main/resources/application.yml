@@ -2,7 +2,8 @@ server:
   port: 8080
   servlet:
     context-path: /boot
-#Spring
+
+# 数据源
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,6 +16,7 @@ spring:
   thymeleaf:
     cache: false
     encoding: utf-8
+
 
 # MyBatis
 mybatis:
