@@ -26,3 +26,7 @@ mybatis:
 # pageHelper
 pagehelper:
   reasonable: true
+#开启MySQL打印
+logging:
+  level:
+    com.etoak.mapper: debug
