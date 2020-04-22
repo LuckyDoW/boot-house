@@ -16,6 +16,9 @@ spring:
   thymeleaf:
     cache: false
     encoding: utf-8
+  servlet:
+    multipart:
+      max-file-size: 2MB
 
 
 # MyBatis
@@ -30,3 +33,11 @@ pagehelper:
 logging:
   level:
     com.etoak.mapper: debug
+
+
+#自定义配置：文件上传和图片访问配置
+upload:
+  dir: d:/upload/
+  savePathPrefix: /pics/
+  mapping: /pics/**
+

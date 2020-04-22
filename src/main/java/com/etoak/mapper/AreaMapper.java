@@ -12,4 +12,11 @@ public interface AreaMapper {
      * @return
      */
     List<Area> queryByPid(@Param("pid") int pid);
+
+    /**
+     * 根据ID查询Area
+     * @param area
+     * @return
+     */
+    Area queryById(@Param("id") int area);
 }

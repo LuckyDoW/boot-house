@@ -46,7 +46,7 @@
         <div class="form-group">
             <label for="rent_mode" class="col-sm-2 control-label">租赁方式</label>
             <div class="col-sm-2 input-group">
-                <select name="rent_mode" id="rent_mode" class="form-control">
+                <select name="rentMode" id="rent_mode" class="form-control">
                     <option value="">==请选择==</option>
                 </select>
             </div>
@@ -65,7 +65,7 @@
         <div class="form-group">
             <label for="house_type" class="col-sm-2 control-label">户型</label>
             <div class="col-sm-2 input-group">
-                <select name="house_type" id="house_type" class="form-control">
+                <select name="houseType" id="house_type" class="form-control">
                     <option value="">==请选择==</option>
                 </select>
             </div>
@@ -245,21 +245,57 @@
                     //校验规则 rules
                     rules:{
                         province: 'required',//表示name属性为province的验证
+                        city:"required",
+                        area:'required',
+                        rent_mode:'required',
+                        orientation:'required',
+                        house_type:'required',
+                        file:'required',
                         address:{            //多个校验时使用数组
                             required:true,
                             minlength:6//不能超过10个字符
                         },
-                    },
-                    //校验失败后的消息messages
-                    messages:{
-                        province: '必选项',
-                        address: {
-                            required: "必填项",
-                            minlength:"不能小于6个字符",
+                        rental:{             //租金验证  //自定义的验证
+                            /*digits:true,
+                            min:100*/
+                            required:true,
+                            positiveInt:true, //自定义的属性
+                            max:100000,
+
                         }
 
                     },
-                })
+                    //校验失败后的消息messages
+                    messages:{
+                        province: '必选项',  //省的校验
+                        city:"必选项",
+                        area:"必选项",
+                        rent_mode:'必填项',
+                        orientation:'必填项',
+                        house_type:'必填项',
+                        file:'必填项',
+                        address: {          //详细地址的校验
+                            required: "必填项",
+                            minlength:"不能小于6个字符",
+                        },
+                        rental:{             //租金验证
+                            /*digits:true,
+                            min:100*/
+                            required:'必填项',
+                            positiveInt:'必须大于0的正整数', //自定义的属性
+                            max:'最大十万元',
+
+                        }
+
+                    },
+                });
+                /*自定义校验规则
+                * $.validator.addMethod(校验规则名称,校验方法,默认的提示消息)
+                * */
+                $.validator.addMethod('positiveInt',function(value,element){
+                    let reg = /^\+?[1-9]\d*$/;
+                    return this.optional(element) || (reg.test(value));
+                },'必须大于0的正整数');
             },
 
         };
