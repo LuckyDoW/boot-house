@@ -16,6 +16,7 @@ spring:
   thymeleaf:
     cache: false
     encoding: utf-8
+    # 默认文件上传是1MB
   servlet:
     multipart:
       max-file-size: 2MB
