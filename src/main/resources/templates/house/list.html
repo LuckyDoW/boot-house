@@ -55,25 +55,10 @@
                                 </label>
                             </div>
                         </div>
-                        <!--3、租金范围-->
+                        <!--3、租金范围(多选)-->
                         <div class="form-group">
                             <label class="col-md-1 control-label">租金</label>
-                            <div class="col-md-6" >
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="rental" value="100-1000">1000元以下
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="rental" value="1000-1500">1000-1500元
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="rental" value="1500-2500">1500-2500元
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="rental" value="2500-5000">2500-5000元
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="rental" value="5000-100000">5000元以上
-                                </label>
+                            <div class="col-md-6" id="rental">
 
                             </div>
                         </div>
@@ -119,7 +104,9 @@
         const areaOption = "<option value=''>==请选择==</option>"
         $(function () {
             house.queryList();
-            /*查询按钮*/
+            /*查询按钮
+            *  点击查询按钮查询一次列表
+            * */
             $("#queryBtn").click(function () {
                 $("#listTable").bootstrapTable("refresh");
             });
@@ -142,16 +129,19 @@
             })
             /*租赁方式（单选框）*/
             house.queryRentMode();
-            /*查询面板的户型、朝向(多选框)*/
+            /*查询面板的朝向(多选框)*/
             house.getQueryPanelDict("orientation");
+            /*查询条件 户型（多选框）*/
             house.getQueryPanelDict("house_type")
+            /*查询条件、价格区间（多选框）*/
+            house.getQueryPanelDict("rental")
         })
         let house = {
             /*查询房源列表*/
             queryList:function () {
                 $('#listTable').bootstrapTable({
                     url:path+'/house/list',
-                    pagination:true,
+                    pagination:true,    //是否开启分页
                     sidePagination: 'server', //服务端分页
                     pageNumber:1,
                     pageSize:10,
@@ -160,7 +150,10 @@
                     paginationPreText: "上一页",
                     paginationNextText: '下一页',
                     queryParams:function (params) {//传到后端的参数
-                        /*定义租金范围*/
+                        /*定义租金范围
+                        * 查询条件结果：rentalList[] 1 ,rentalList[] 2
+                        * 需要后端处理 变成：rentalList[1,2,3]
+                        * */
                         let rentalList=[];
                         $('input[name="rental"]:checked').each(function () {
                             rentalList.push(this.value);
@@ -183,7 +176,9 @@
                         $("input[name='orientation']:checked").each(function () {
                             orientationList.push(this.value);//追加到orientationList后面
                         });
-                        console.log(rentMode);
+                        /*这里是携带到后端的参数
+                        * return 返回的参数
+                        * */
                         let newParam = {
                             pageNum:params.pageNumber,
                             pageSize:params.pageSize,
@@ -222,6 +217,7 @@
 
                 });
             },
+            /*省市区级联*/
             queryArea:function (domId,pid) {
                 $.ajax({
                     url:path + '/area/queryByPid',

@@ -69,9 +69,10 @@ public class HouseServiceImpl implements HouseService {
         if(ArrayUtils.isNotEmpty(rentalList)){
             /*这里的数据[{100-1000},{1000-1500}]*/
             List<Map<String,Integer>> rentalMapList = new ArrayList<>();
-            /*rental数据{100-1000},{1000-1500}*/
             for(String rental:rentalList){
+                /*rental数据{100-1000},{1000-1500}*/
                 String[] rentalArray = rental.split("-");
+
                 Map<String,Integer> rentalMap = new HashedMap<>();
                 rentalMap.put("start",Integer.valueOf(rentalArray[0]));
                 rentalMap.put("end",Integer.valueOf(rentalArray[1]));
