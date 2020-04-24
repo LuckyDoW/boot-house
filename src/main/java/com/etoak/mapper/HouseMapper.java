@@ -2,6 +2,7 @@ package com.etoak.mapper;
 
 import com.etoak.bean.House;
 import com.etoak.bean.HouseVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,4 +27,11 @@ public interface HouseMapper {
      * @return
      */
     int updateHouse(House house);
+
+    /**
+     * 删除房源
+     * @param id
+     * @return
+     */
+    int  deleteById(@Param("id") int id);
 }

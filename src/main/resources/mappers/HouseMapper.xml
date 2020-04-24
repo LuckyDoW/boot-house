@@ -128,5 +128,10 @@
         where id =#{id}
     </update>
 
+    <delete id="deleteById" parameterType="int">
+        delete from t_boot_house where id =#{id}
+        <!--可以写下面的-->
+        <!-- delete from t_boot_house where id =#{value}-->
+    </delete>
 
 </mapper>

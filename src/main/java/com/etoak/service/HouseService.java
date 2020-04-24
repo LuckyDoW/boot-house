@@ -29,4 +29,10 @@ public interface HouseService {
      * @return
      */
     int updateHouse(House house);
+
+    /**
+     * 删除房源
+     * @param id
+     */
+    int deleteById(int id);
 }
