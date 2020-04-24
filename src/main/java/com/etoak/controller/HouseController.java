@@ -154,4 +154,16 @@ public class HouseController {
         return "house/list";
     }
 
+
+    /**
+     * 编辑更新房源
+     */
+    @PutMapping("/update")
+    public String update(House house){
+        log.info("house:{}",house);
+        houseService.updateHouse(house);
+
+        return "redirect:/house/toList";
+    }
+
 }
