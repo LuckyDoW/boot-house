@@ -10,6 +10,11 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/et1910?serverTimezone=UTC
     username: root
     password: etoak
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://39.97.168.45:3306/lucky?serverTimezone=UTC
+#    username: root
+#    password: gjx19980117
+
     hikari:
       maximum-pool-size: 50
 

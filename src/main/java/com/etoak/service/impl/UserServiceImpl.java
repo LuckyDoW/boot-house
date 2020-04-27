@@ -15,8 +15,8 @@ public class UserServiceImpl  implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    @Autowired
-    JmsTemplate jmsTemplate;
+//    @Autowired
+//    JmsTemplate jmsTemplate;
 
     @Override
     public int addUser(User user) {
@@ -28,15 +28,22 @@ public class UserServiceImpl  implements UserService {
         user.setPassword(password);
         //设置MQActive
         int addResult = userMapper.addUser(user);
-        //发送JMS消息
-        jmsTemplate.send("email",session -> {
-            Email email = new Email();
-            email.setSubject("用户激活邮件");
-            email.setReceiver(user.getEmail());
-            email.setContent("请点击激活：http://location:8080/boot/user/active "+user.getName());
-            return session.createTextMessage(JSONObject.toJSONString(email));
-        });
+//        //发送JMS消息
+//        jmsTemplate.send("email",session -> {
+//            Email email = new Email();
+//            email.setSubject("用户激活邮件");
+//            email.setReceiver(user.getEmail());
+//            email.setContent("请点击激活：http://location:8080/boot/user/active "+user.getName());
+//            return session.createTextMessage(JSONObject.toJSONString(email));
+//        });
 
         return addResult;
+    }
+
+
+    @Override
+    public User queryByName(String name) {
+
+        return userMapper.queryByName(name);
     }
 }

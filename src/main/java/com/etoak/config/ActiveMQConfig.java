@@ -8,7 +8,7 @@ import org.springframework.jms.core.JmsTemplate;
 import javax.jms.DeliveryMode;
 import javax.jms.Session;
 
-@Configuration
+//@Configuration
 public class ActiveMQConfig {
     /**
      * 1、ActiveMQConnectionFactory

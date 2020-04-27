@@ -9,4 +9,11 @@ public interface UserService {
      * @return
      */
     int addUser(User user);
+
+    /**
+     * 查询用户名是否存在
+     * @param name
+     * @return
+     */
+    User queryByName(String name);
 }
